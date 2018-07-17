@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>打虎新形态</title>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/animate.min.css">
+<script src="js/jquery.min.js"></script>  
+<script src="js/swiper.min.js"></script>
+<script src="js/swiper.animate.min.js"></script>
+
+
+<style>
+*{
+	margin:0;
+	padding:0;
+}
+
+html,body{
+	height:100%;
+}
+body{
+	font-family:"microsoft yahei";
+}
+.swiper-container {
+	width: 100%;
+    height: 100%;
+	background:#000;
+}  
+
+.swiper-slide{
+	width:100%;
+	height:100%;
+	background:url(upload/bg.jpg) no-repeat left top;
+	background-size:100% 100%;
+}
+img{
+	display:block;
+}
+.swiper-pagination-bullet {
+width: .6rem;
+height: .6rem;
+background: #fff;
+opacity: .4;
+}
+.swiper-pagination-bullet-active {
+opacity: 1;
+}
+@-webkit-keyframes start {
+	0%,30% {opacity: 0;-webkit-transform: translate(0,10px);}
+	60% {opacity: 1;-webkit-transform: translate(0,0);}
+	100% {opacity: 0;-webkit-transform: translate(0,-8px);}
+}
+@-moz-keyframes start {
+	0%,30% {opacity: 0;-moz-transform: translate(0,10px);}
+	60% {opacity: 1;-moz-transform: translate(0,0);}
+	100% {opacity: 0;-moz-transform: translate(0,-8px);}
+}
+@keyframes start {
+	0%,30% {opacity: 0;transform: translate(0,10px);}
+	60% {opacity: 1;transform: translate(0,0);}
+	100% {opacity: 0;transform: translate(0,-8px);}
+}
+.ani{
+	position:absolute;
+	}
+.txt{
+	position:absolute;
+}
+#array{
+	position:absolute;z-index:999;-webkit-animation: start 1.5s infinite ease-in-out;
+}
+	   body,ul,li{  
+			font-family:"微软雅黑";
+			margin:0px;
+			padding:0px;
+			list-style:none;
+		} 
+		.mydiv{
+			position: relative;
+            width: 100%;
+            height: 100%;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background-position: 0px 0px;
+            background-size: 100% 100%;
+            margin: auto;
+		}
+        .item1 {  
+            width:320px;  
+            height: 100px;  
+            cursor: move;  
+            position: absolute;   
+            background-color: inherit;  
+        }    
+        .item1 p{
+            position: relative;
+            margin: 0px;
+            padding: 1rem;
+            height: 100%;
+            outline: none;
+            border:none; 
+            color:#555; 
+            font-size:1.4rem; 
+            z-index:3;
+        } 
+html {
+	font-size : 10px;
+}
+@media screen and (min-width: 401px){
+    html {
+        font-size: 14px;
+    }
+}
+@media screen and (min-width: 428px){
+    html {
+        font-size: 16px;
+    }
+}
+@media screen and (min-width: 481px){
+    html {
+        font-size: 18px; 
+    }
+}
+@media screen and (min-width: 569px){
+    html {
+        font-size: 20px; 
+    }
+}
+@media screen and (min-width: 641px){
+    html {
+        font-size: 22px; 
+    }
+}
+/*移动端的rem单位标准*/
+</style>
+</head>
+
+<body>
+
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+    <!-------------slide1----------------->
+        <section class="swiper-slide swiper-slide1">
+            <div class="mydiv">  
+
+			</div> 
+        </section>
+     <!---------------slide2-------------->   
+        <section class="swiper-slide swiper-slide2">
+            <div class="mydiv">  
+
+			</div> 
+        </section>
+     <!----------------slide3-------------->
+        <section class="swiper-slide swiper-slide3">
+             <div class="mydiv">  
+
+			</div>         
+        </section>
+ 
+        
+    </div>
+    
+   <img src="images/arrow.png" style="width:20px;height:15px; top:460px; left:150px;" id="array" class="resize"> 
+  <div class="swiper-pagination"></div>  
+</div>
+<script type="text/javascript" src="js/myshow.js">  </script> 
+<script>  
+
+scaleW=window.innerWidth/320;
+scaleH=window.innerHeight/480;
+var resizes = document.querySelectorAll('.resize');
+          for (var j=0; j<resizes.length; j++) {
+           resizes[j].style.width=parseInt(resizes[j].style.width)*scaleW+'px'; 
+		   resizes[j].style.height=parseInt(resizes[j].style.height)*scaleH+'px'; 
+		   resizes[j].style.top=parseInt(resizes[j].style.top)*scaleH+'px'; 
+		   resizes[j].style.left=parseInt(resizes[j].style.left)*scaleW+'px';  
+          }
+		  
+  var mySwiper = new Swiper ('.swiper-container', {
+   direction : 'vertical',
+   pagination: '.swiper-pagination',
+  //virtualTranslate : true,
+   mousewheelControl : true,
+   onInit: function(swiper){
+   swiperAnimateCache(swiper);
+   swiperAnimate(swiper);
+	  },
+   onSlideChangeEnd: function(swiper){
+	swiperAnimate(swiper);
+    },
+	onTransitionEnd: function(swiper){
+	swiperAnimate(swiper);
+    },
+	
+	
+	watchSlidesProgress: true,
+
+      onProgress: function(swiper){
+        for (var i = 0; i < swiper.slides.length; i++){
+          var slide = swiper.slides[i];
+          var progress = slide.progress;
+          var translate = progress*swiper.height/4;  
+		  scale = 1 - Math.min(Math.abs(progress * 0.5), 1);
+          var opacity = 1 - Math.min(Math.abs(progress/2),0.5);
+          slide.style.opacity = opacity;
+		  es = slide.style;
+		  es.webkitTransform = es.MsTransform = es.msTransform = es.MozTransform = es.OTransform = es.transform = 'translate3d(0,'+translate+'px,-'+translate+'px) scaleY(' + scale + ')';
+
+        }
+      },
+	
+	   onSetTransition: function(swiper, speed) {
+        for (var i = 0; i < swiper.slides.length; i++){
+          es = swiper.slides[i].style;
+		  es.webkitTransitionDuration = es.MsTransitionDuration = es.msTransitionDuration = es.MozTransitionDuration = es.OTransitionDuration = es.transitionDuration = speed + 'ms';
+
+        }
+      },
+	
+	
+	
+	   })         
+  </script>
+</body>
+</html>
